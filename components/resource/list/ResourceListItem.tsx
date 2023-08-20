@@ -2,17 +2,41 @@ import { useState } from "react";
 
 import { TypedIcon } from "typed-design-system";
 import ResourceTitleEditInput from "../input/ResourceTitleEditInput";
+import { useSetRecoilState } from "recoil";
+import { resourcesAtom } from "@/store";
 
 type Props = Pick<Resource, "id" | "title">;
 
 export default function ResourceListItem({ id, title }: Props): JSX.Element {
+  const setResourceList = useSetRecoilState(resourcesAtom);
+
   const [isEditing, setIsEditing] = useState(false);
 
   const handleChangeTitle = (value: string) => {
-    console.log("Changed", value);
+    console.log(`Title Changed - ${id}: ${value}`);
+
+    // Update Resource List
+    setResourceList((prevList) =>
+      prevList.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            title: value,
+          };
+        }
+        return item;
+      })
+    );
 
     // Set IsEditing to False
     setIsEditing(false);
+  };
+
+  const handleDeleteItem = () => {
+    console.log(`Item Deleted - ${id}`);
+
+    // Update Resource List
+    setResourceList((prevList) => prevList.filter((item) => item.id !== id));
   };
 
   return (
@@ -40,7 +64,7 @@ export default function ResourceListItem({ id, title }: Props): JSX.Element {
         <button onClick={() => setIsEditing((prev) => !prev)}>
           <TypedIcon icon="edit_19" style={{ fontSize: "19px" }} />
         </button>
-        <button>
+        <button onClick={() => handleDeleteItem()}>
           <TypedIcon icon="trash_19" style={{ fontSize: "19px" }} />
         </button>
       </div>

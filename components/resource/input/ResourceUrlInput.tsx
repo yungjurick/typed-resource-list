@@ -1,4 +1,5 @@
-import { useId, useRef, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
+import { useRef, useState } from "react";
 import useOutSideClick from "@/hooks/useOutsideClick";
 
 import { useSetRecoilState } from "recoil";
@@ -12,7 +13,7 @@ interface Props {
 export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
-  const newId = useId();
+  const newId = uuidV4();
 
   const [url, setUrl] = useState("");
   const setResourceList = useSetRecoilState(resourcesAtom);
