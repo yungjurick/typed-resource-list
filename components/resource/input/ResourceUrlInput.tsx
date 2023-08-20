@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
 import useOutSideClick from "@/hooks/useOutsideClick";
-
 import Input from "@/components/Input";
-import useValidateResource from "@/hooks/useValidateResource";
+import useUploadResource from "@/hooks/useUploadResource";
 
 interface Props {
   onClose: () => void;
@@ -13,7 +12,7 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
 
   const [url, setUrl] = useState("");
 
-  const { uploadUrlResource } = useValidateResource();
+  const { uploadUrlResource } = useUploadResource();
 
   // Close URL Input on Outside Click
   useOutSideClick(inputWrapperRef, () => {
@@ -23,6 +22,7 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Close if no URL
     if (!url) onClose();
 
     try {

@@ -4,7 +4,16 @@ import { calculateSuccess, convertToBase64, randomDelay } from "@/utils";
 import { isValidUrlSchema, isYoutubeUrl } from "@/utils/validator";
 import { useSetRecoilState } from "recoil";
 
-export default function useValidateResource() {
+interface UploadResource {
+  uploadUrlResource: (url: string) => Promise<void>;
+  uploadImageResource: (file: File) => Promise<void>;
+}
+
+/**
+ * Upload Resource Logic Hook
+ * @returns UploadResource
+ */
+export default function useUploadResource(): UploadResource {
   const setResourceList = useSetRecoilState(resourcesAtom);
 
   const uploadUrlResource = async (url: string): Promise<void> => {

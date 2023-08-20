@@ -1,9 +1,9 @@
-import { resourcesAtom } from "@/store";
+import { resourcesAtom, sortedResourcesSelector } from "@/store";
 import { useRecoilValue } from "recoil";
 import ResourceListItem from "./ResourceListItem";
 
 export default function ResourceList(): JSX.Element {
-  const resourceList = useRecoilValue(resourcesAtom);
+  const resourceList = useRecoilValue(sortedResourcesSelector);
 
   return (
     <div className="p-[10px] flex flex-col gap-y-[10px] h-[calc(100vh-56px)] overflow-auto scrollbar-hide">

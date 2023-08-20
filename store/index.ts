@@ -3,7 +3,9 @@ import {
   RESOURCES_ATOM_KEY,
   SELECTED_RESOURCE_ID_ATOM_KEY,
   SELECTED_RESOURCE_SELECTOR_KEY,
+  SORTED_RESOURCES_SELECTOR_KEY,
 } from "./keys";
+import compareAsc from "date-fns/compareAsc";
 
 /**
  * Atoms
@@ -22,6 +24,19 @@ export const selectedResourceIdAtom = atom<string | null>({
 /**
  * Selectors
  */
+
+export const sortedResourcesSelector = selector<Resource[]>({
+  key: SORTED_RESOURCES_SELECTOR_KEY,
+  get: ({ get }) => {
+    const resources = [...get(resourcesAtom)];
+
+    if (resources.length === 0 || resources.length === 1) return resources;
+
+    return resources.sort((a, b) =>
+      compareAsc(new Date(b.createdAt), new Date(a.createdAt))
+    );
+  },
+});
 
 export const selectedResourceSelector = selector<Resource | null>({
   key: SELECTED_RESOURCE_SELECTOR_KEY,

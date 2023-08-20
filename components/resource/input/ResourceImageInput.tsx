@@ -1,7 +1,7 @@
-import useValidateResource from "@/hooks/useValidateResource";
+import useUploadResource from "@/hooks/useUploadResource";
 
 export default function ResourceImageInput(): JSX.Element {
-  const { uploadImageResource } = useValidateResource();
+  const { uploadImageResource } = useUploadResource();
 
   const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;

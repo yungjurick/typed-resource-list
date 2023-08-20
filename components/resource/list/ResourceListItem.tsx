@@ -26,7 +26,7 @@ export default function ResourceListItem({ resource }: Props): JSX.Element {
         if (item.id === resource.id) {
           return {
             ...item,
-            title: value,
+            title: value.length === 0 ? "Untitled" : value,
           };
         }
         return item;
