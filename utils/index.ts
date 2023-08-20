@@ -33,6 +33,6 @@ export const randomDelay = () => {
 export const calculateSuccess = (): boolean => {
   const getRandomInt = Math.floor(Math.random() * 10) + 1; // (1 ~ 10)
 
-  console.info("Success: ", getRandomInt <= 8, getRandomInt);
+  console.info(`Success: ${getRandomInt <= 8} - ${getRandomInt}`);
   return getRandomInt <= 8; // 80% chance of success
 };

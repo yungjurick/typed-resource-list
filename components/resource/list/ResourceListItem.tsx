@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { TypedIcon } from "typed-design-system";
 import ResourceTitleEditInput from "../input/ResourceTitleEditInput";
@@ -10,32 +10,36 @@ interface Props {
 }
 
 export default function ResourceListItem({ resource }: Props): JSX.Element {
-  const setResourceList = useSetRecoilState(resourcesAtom);
   const [selectedResourceId, setSelectedIdResource] = useRecoilState(
     selectedResourceIdAtom
   );
 
+  const setResourceList = useSetRecoilState(resourcesAtom);
+
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleChangeTitle = (value: string) => {
-    console.log(`Title Changed - ${resource.id}: ${value}`);
+  const handleChangeTitle = useCallback(
+    (value: string) => {
+      console.log(`Title Changed - ${resource.id}: ${value}`);
 
-    // Update Resource List
-    setResourceList((prevList) =>
-      prevList.map((item) => {
-        if (item.id === resource.id) {
-          return {
-            ...item,
-            title: value.length === 0 ? "Untitled" : value,
-          };
-        }
-        return item;
-      })
-    );
+      // Update Resource List
+      setResourceList((prevList) =>
+        prevList.map((item) => {
+          if (item.id === resource.id) {
+            return {
+              ...item,
+              title: value.length === 0 ? "Untitled" : value,
+            };
+          }
+          return item;
+        })
+      );
 
-    // Set IsEditing to False
-    setIsEditing(false);
-  };
+      // Set IsEditing to False
+      setIsEditing(false);
+    },
+    [resource.id, setResourceList]
+  );
 
   const handleDeleteItem = () => {
     console.log(`Item Deleted - ${resource.id}`);
@@ -46,7 +50,7 @@ export default function ResourceListItem({ resource }: Props): JSX.Element {
     );
   };
 
-  const handleClickItem = () => {
+  const handleClickItem = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setSelectedIdResource(resource.id);
   };
 
@@ -57,9 +61,9 @@ export default function ResourceListItem({ resource }: Props): JSX.Element {
           ? "border-[#38A5E1]"
           : "border-transparent"
       }`}
-      onClick={handleClickItem}
+      onClick={(e) => handleClickItem(e)}
     >
-      {/* Top Section */}
+      {/* --- Top Section --- */}
       <div>
         {/* Resource Title */}
         {!isEditing && (
@@ -79,12 +83,12 @@ export default function ResourceListItem({ resource }: Props): JSX.Element {
         )}
       </div>
 
-      {/* Actions */}
+      {/* --- Actions ---  */}
       <div className="flex justify-end items-center gap-x-[8px] p-[12px]">
         <button onClick={() => setIsEditing((prev) => !prev)}>
           <TypedIcon icon="edit_19" style={{ fontSize: "19px" }} />
         </button>
-        <button onClick={() => handleDeleteItem()}>
+        <button onClick={handleDeleteItem}>
           <TypedIcon icon="trash_19" style={{ fontSize: "19px" }} />
         </button>
       </div>

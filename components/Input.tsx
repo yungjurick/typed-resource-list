@@ -4,6 +4,7 @@ interface Props {
   value: string;
   placeholder?: string;
   onChange: (value: string) => void;
+  onBlur: () => void;
 }
 
 /**
@@ -11,7 +12,12 @@ interface Props {
  * @param Props
  * @returns Input Component
  */
-export default function Input({ value, placeholder = "...", onChange }: Props) {
+export default function Input({
+  value,
+  placeholder = "...",
+  onChange,
+  onBlur,
+}: Props) {
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -26,6 +32,7 @@ export default function Input({ value, placeholder = "...", onChange }: Props) {
       className="text-[12px] font-[400] p-[8px] w-full rounded-[5px] border border-[#38A5E1] bg-[#F7F7F7] outline-none"
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
+      onBlur={onBlur}
     />
   );
 }
