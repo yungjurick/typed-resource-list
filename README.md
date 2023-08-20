@@ -1,2 +1,2 @@
-# typed-resource-list
-Type ResourceList Prototype Task
+# Type Resource List Prototype
+- Type ResourceList Prototype Task
