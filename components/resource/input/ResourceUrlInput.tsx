@@ -1,9 +1,6 @@
-import { v4 as uuidV4 } from "uuid";
 import { useRef, useState } from "react";
 import useOutSideClick from "@/hooks/useOutsideClick";
 
-import { useSetRecoilState } from "recoil";
-import { resourcesAtom } from "@/store";
 import Input from "@/components/Input";
 import useValidateResource from "@/hooks/useValidateResource";
 
@@ -37,6 +34,7 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
 
     // Reset URL Input
     setUrl("");
+    onClose();
   };
 
   return (

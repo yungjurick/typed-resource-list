@@ -3,22 +3,25 @@ import { useState } from "react";
 import { TypedIcon } from "typed-design-system";
 import ResourceTitleEditInput from "../input/ResourceTitleEditInput";
 import { useSetRecoilState } from "recoil";
-import { resourcesAtom } from "@/store";
+import { resourcesAtom, selectedResourceIdAtom } from "@/store";
 
-type Props = Pick<Resource, "id" | "title">;
+interface Props {
+  resource: Resource;
+}
 
-export default function ResourceListItem({ id, title }: Props): JSX.Element {
+export default function ResourceListItem({ resource }: Props): JSX.Element {
   const setResourceList = useSetRecoilState(resourcesAtom);
+  const setSelectedIdResource = useSetRecoilState(selectedResourceIdAtom);
 
   const [isEditing, setIsEditing] = useState(false);
 
   const handleChangeTitle = (value: string) => {
-    console.log(`Title Changed - ${id}: ${value}`);
+    console.log(`Title Changed - ${resource.id}: ${value}`);
 
     // Update Resource List
     setResourceList((prevList) =>
       prevList.map((item) => {
-        if (item.id === id) {
+        if (item.id === resource.id) {
           return {
             ...item,
             title: value,
@@ -33,20 +36,29 @@ export default function ResourceListItem({ id, title }: Props): JSX.Element {
   };
 
   const handleDeleteItem = () => {
-    console.log(`Item Deleted - ${id}`);
+    console.log(`Item Deleted - ${resource.id}`);
 
     // Update Resource List
-    setResourceList((prevList) => prevList.filter((item) => item.id !== id));
+    setResourceList((prevList) =>
+      prevList.filter((item) => item.id !== resource.id)
+    );
+  };
+
+  const handleClickItem = () => {
+    setSelectedIdResource(resource.id);
   };
 
   return (
-    <div className="bg-white rounded-[10px] h-[90px] shrink-0 flex flex-col justify-between cursor-pointer">
+    <div
+      className="bg-white rounded-[10px] h-[90px] shrink-0 flex flex-col justify-between cursor-pointer"
+      onClick={handleClickItem}
+    >
       {/* Top Section */}
       <div>
         {/* Resource Title */}
         {!isEditing && (
           <div className="pt-[12px] px-[12px] text-[14px] break-words line-clamp-2">
-            {title}
+            {resource.title}
           </div>
         )}
 
@@ -54,7 +66,7 @@ export default function ResourceListItem({ id, title }: Props): JSX.Element {
         {isEditing && (
           <div className="px-[4px] pt-[4px]">
             <ResourceTitleEditInput
-              initialValue={title}
+              initialValue={resource.title}
               onSubmit={handleChangeTitle}
             />
           </div>

@@ -10,8 +10,7 @@ export default function ResourceList(): JSX.Element {
       {resourceList.map((resource) => (
         <ResourceListItem
           key={`${resource.type}-${resource.id}`}
-          id={resource.id}
-          title={resource.title}
+          resource={resource}
         />
       ))}
     </div>

@@ -25,7 +25,7 @@ export default function ResourceImageInput(): JSX.Element {
     <>
       <label
         htmlFor="image-upload"
-        className="w-full h-full block cursor-pointer py-[8px]"
+        className="w-full h-full inline-block cursor-pointer py-[8px] leading-none"
       >
         이미지 추가
       </label>
