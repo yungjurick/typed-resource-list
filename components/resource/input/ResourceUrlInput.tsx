@@ -24,6 +24,8 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!url) onClose();
+
     // TODO: 1. Validate URL
     // TODO: 2. Add URL Resource to Resource List
 

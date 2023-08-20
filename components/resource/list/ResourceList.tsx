@@ -6,7 +6,7 @@ export default function ResourceList(): JSX.Element {
   const resourceList = useRecoilValue(resourcesAtom);
 
   return (
-    <div className="p-[10px] flex flex-col gap-y-[10px]">
+    <div className="p-[10px] flex flex-col gap-y-[10px] h-[calc(100vh-56px)] overflow-auto scrollbar-hide">
       {resourceList.map((resource) => (
         <ResourceListItem
           key={`${resource.type}-${resource.id}`}

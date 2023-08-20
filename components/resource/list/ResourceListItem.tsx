@@ -40,7 +40,7 @@ export default function ResourceListItem({ id, title }: Props): JSX.Element {
   };
 
   return (
-    <div className="bg-white rounded-[10px] h-[90px] flex flex-col justify-between cursor-pointer">
+    <div className="bg-white rounded-[10px] h-[90px] shrink-0 flex flex-col justify-between cursor-pointer">
       {/* Top Section */}
       <div>
         {/* Resource Title */}
