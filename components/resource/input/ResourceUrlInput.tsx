@@ -1,22 +1,24 @@
 import { useId, useRef, useState } from "react";
 import useOutSideClick from "@/hooks/useOutsideClick";
-import Input from "../Input";
+
 import { useSetRecoilState } from "recoil";
 import { resourcesAtom } from "@/store";
+import Input from "@/components/Input";
 
 interface Props {
   onClose: () => void;
 }
 
 export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
-  const urlInputWrapperRef = useRef<HTMLDivElement>(null);
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
+
   const newId = useId();
 
   const [url, setUrl] = useState("");
   const setResourceList = useSetRecoilState(resourcesAtom);
 
   // Close URL Input on Outside Click
-  useOutSideClick(urlInputWrapperRef, () => {
+  useOutSideClick(inputWrapperRef, () => {
     onClose();
   });
 
@@ -44,7 +46,7 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
 
   return (
     <div
-      ref={urlInputWrapperRef}
+      ref={inputWrapperRef}
       className="absolute -bottom-[40px] left-0 w-full px-[10px]"
     >
       <div className="w-full border border-[#E5E5E5] rounded-[5px] p-[5px] bg-white">

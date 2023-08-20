@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ResourceUrlInput from "./ResourceUrlInput";
+import ResourceUrlInput from "../input/ResourceUrlInput";
 
 export default function ResourceListHeader(): JSX.Element {
   const [showUrlInput, setShowUrlInput] = useState(false);

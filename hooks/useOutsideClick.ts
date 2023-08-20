@@ -16,10 +16,10 @@ export default function useOutSideClick(
       }
     };
 
-    document.addEventListener("click", (e) => handleClickOutside(e));
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", (e) => handleClickOutside(e));
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [callback, ref]);
 }

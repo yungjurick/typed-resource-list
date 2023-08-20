@@ -1,6 +1,6 @@
 "use client";
 
-import ResourceListContainer from "@/components/resource/ResourceListContainer";
+import ResourceListContainer from "@/components/resource/list/ResourceListContainer";
 
 export default function Home() {
   return (
