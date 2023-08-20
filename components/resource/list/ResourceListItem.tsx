@@ -45,7 +45,9 @@ export default function ResourceListItem({ id, title }: Props): JSX.Element {
       <div>
         {/* Resource Title */}
         {!isEditing && (
-          <div className="pt-[12px] px-[12px] text-[14px]">{title}</div>
+          <div className="pt-[12px] px-[12px] text-[14px] break-words line-clamp-2">
+            {title}
+          </div>
         )}
 
         {/* Resource Title Edit Input */}

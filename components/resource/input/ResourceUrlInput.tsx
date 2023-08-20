@@ -13,8 +13,6 @@ interface Props {
 export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
-  const newId = uuidV4();
-
   const [url, setUrl] = useState("");
   const setResourceList = useSetRecoilState(resourcesAtom);
 
@@ -27,13 +25,13 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
     e.preventDefault();
 
     // TODO: 1. Validate URL
-    // TODO: 2. Add URL Item to Resource List
+    // TODO: 2. Add URL Resource to Resource List
 
-    // FIXME: Testing Resource List Addition
+    // FIXME: Testing Resource List Addition (URL)
     setResourceList((prevList) => [
       ...prevList,
       {
-        id: newId,
+        id: uuidV4(),
         type: "url",
         title: url, // - default title is the URL itself
         url,

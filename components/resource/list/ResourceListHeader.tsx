@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ResourceUrlInput from "../input/ResourceUrlInput";
+import ResourceImageInput from "../input/ResourceImageInput";
 
 export default function ResourceListHeader(): JSX.Element {
   const [showUrlInput, setShowUrlInput] = useState(false);
@@ -8,13 +9,13 @@ export default function ResourceListHeader(): JSX.Element {
     <div className="relative p-[10px] flex justify-between items-center gap-x-[10px] bg-white shadow-[0px_2px_5px_0px_rgba(0,0,0,0.1)]">
       {/* Action Buttons */}
       <button
-        className="w-full rounded-[5px] border border-[#E5E5E5] py-[8px] text-[12px] font-[400]"
+        className="w-full rounded-[5px] border border-[#E5E5E5] text-[12px] font-[400] py-[8px]"
         onClick={() => setShowUrlInput(true)}
       >
         URL 추가
       </button>
-      <button className="w-full rounded-[5px] border border-[#E5E5E5] py-[8px] text-[12px] font-[400]">
-        이미지 추가
+      <button className="w-full rounded-[5px] border border-[#E5E5E5] text-[12px] font-[400]">
+        <ResourceImageInput />
       </button>
 
       {/* URL Input */}
