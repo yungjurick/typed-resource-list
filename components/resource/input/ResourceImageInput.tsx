@@ -1,31 +1,24 @@
-import { resourcesAtom } from "@/store";
-import { useSetRecoilState } from "recoil";
-import { v4 as uuidV4 } from "uuid";
+import useValidateResource from "@/hooks/useValidateResource";
 
 export default function ResourceImageInput(): JSX.Element {
-  const setResourceList = useSetRecoilState(resourcesAtom);
+  const { uploadImageResource } = useValidateResource();
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
     // early-return for no files
     if (!files || files.length === 0) return;
 
-    // TODO: 1. Validate Resource Register
-    // TODO: 2. Add Image Resource to Resource List
+    const filesArr = Array.from(files);
 
-    // FIXME: Testing Resource List Addition (IMAGE)
-    const imageResourceList: ImageResource[] = Array.from(files).map(
-      (file) => ({
-        id: uuidV4(),
-        type: "image",
-        title: file.name, // - default title is the file name
-        file,
-        createdAt: new Date().toISOString(),
-      })
-    );
-
-    setResourceList((prevList) => [...prevList, ...imageResourceList]);
+    // Upload each image file
+    filesArr.forEach(async (file) => {
+      try {
+        await uploadImageResource(file);
+      } catch (e) {
+        alert(e);
+      }
+    });
   };
 
   return (
@@ -42,6 +35,10 @@ export default function ResourceImageInput(): JSX.Element {
         accept="image/jpeg, image/png"
         className="hidden"
         multiple
+        onClick={(e) => {
+          // Reset input value to allow re-upload of same file
+          e.currentTarget.value = "";
+        }}
         onChange={handleOnChange}
       />
     </>

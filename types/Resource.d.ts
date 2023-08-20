@@ -13,7 +13,7 @@ interface UrlResource extends BaseResource {
 
 interface ImageResource extends BaseResource {
   type: "image";
-  file: Blob;
+  fileBase64: string;
 }
 
 type Resource = UrlResource | ImageResource;
