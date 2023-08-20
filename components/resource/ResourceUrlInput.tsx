@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import Input from "../input";
 import useOutSideClick from "@/hooks/useOutsideClick";
+import Input from "../Input";
 
 interface Props {
   onClose: () => void;
