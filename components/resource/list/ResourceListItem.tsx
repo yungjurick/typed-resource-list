@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { TypedIcon } from "typed-design-system";
 import ResourceTitleEditInput from "../input/ResourceTitleEditInput";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { resourcesAtom, selectedResourceIdAtom } from "@/store";
 
 interface Props {
@@ -11,7 +11,9 @@ interface Props {
 
 export default function ResourceListItem({ resource }: Props): JSX.Element {
   const setResourceList = useSetRecoilState(resourcesAtom);
-  const setSelectedIdResource = useSetRecoilState(selectedResourceIdAtom);
+  const [selectedResourceId, setSelectedIdResource] = useRecoilState(
+    selectedResourceIdAtom
+  );
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -50,7 +52,11 @@ export default function ResourceListItem({ resource }: Props): JSX.Element {
 
   return (
     <div
-      className="bg-white rounded-[10px] h-[90px] shrink-0 flex flex-col justify-between cursor-pointer"
+      className={`bg-white rounded-[10px] h-[90px] shrink-0 flex flex-col justify-between cursor-pointer border ${
+        selectedResourceId === resource.id
+          ? "border-[#38A5E1]"
+          : "border-transparent"
+      }`}
       onClick={handleClickItem}
     >
       {/* Top Section */}
