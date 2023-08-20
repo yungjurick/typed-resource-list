@@ -1,4 +1,4 @@
-import { resourcesAtom, sortedResourcesSelector } from "@/store";
+import { sortedResourcesSelector } from "@/store";
 import { useRecoilValue } from "recoil";
 import ResourceListItem from "./ResourceListItem";
 import ResourceListHeader from "./ResourceListHeader";

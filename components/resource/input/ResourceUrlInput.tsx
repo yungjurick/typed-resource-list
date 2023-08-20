@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "@/components/Input";
 import useUploadResource from "@/hooks/useUploadResource";
+import { toast } from "react-toastify";
 
 interface Props {
   onClose: () => void;
@@ -17,11 +18,23 @@ export default function ResourceUrlInput({ onClose }: Props): JSX.Element {
     // Close if no URL
     if (!url) onClose();
 
+    const toastId = toast.loading("Uploading Url Resource...");
+
     try {
       await uploadUrlResource(url);
+      toast.update(toastId, {
+        render: "Url Resource Uploaded!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
     } catch (e) {
-      const err = e as Error;
-      alert(err);
+      toast.update(toastId, {
+        render: `${e}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
 
     // Reset URL Input

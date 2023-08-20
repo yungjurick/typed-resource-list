@@ -1,4 +1,5 @@
 import useUploadResource from "@/hooks/useUploadResource";
+import { toast } from "react-toastify";
 
 export default function ResourceImageInput(): JSX.Element {
   const { uploadImageResource } = useUploadResource();
@@ -13,10 +14,23 @@ export default function ResourceImageInput(): JSX.Element {
 
     // Upload each image file
     filesArr.forEach(async (file) => {
+      const toastId = toast.loading("Uploading Image...");
+
       try {
         await uploadImageResource(file);
+        toast.update(toastId, {
+          render: "Image Uploaded!",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
       } catch (e) {
-        alert(e);
+        toast.update(toastId, {
+          render: `${e}`,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
       }
     });
   };
