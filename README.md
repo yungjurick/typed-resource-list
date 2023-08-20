@@ -1,8 +1,14 @@
 # Typed Resource List Prototype
 
-## Getting Started
+## How to run the project
 
-First, run the development server:
+Install dependencies:
+
+```bash
+yarn install
+```
+
+Run the development server:
 
 ```bash
 yarn dev
