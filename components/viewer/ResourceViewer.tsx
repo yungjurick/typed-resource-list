@@ -8,11 +8,12 @@ export default function ResourceViewer(): JSX.Element {
 
   return (
     <div className="h-full flex flex-col justify-between bg-[#F0F0F0]">
-      {/* Viewer Header */}
+      {/* Resource Viewer Header */}
       {selectedResource && (
         <ResourceViewerHeader title={selectedResource.title} />
       )}
 
+      {/* Resource Viewer */}
       {selectedResource && (
         <div className="flex justify-center items-center w-full flex-1 max-h-[calc(100vh-50px)] relative bg-white">
           {/* URL Resource View */}

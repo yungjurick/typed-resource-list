@@ -11,9 +11,12 @@ export default function ResourceViewerHeader({ title }: Props): JSX.Element {
 
   return (
     <div className="relative z-10 h-[50px] grid grid-cols-3 grid-rows-1 pt-[16px] pr-[15px] pb-[15px] pl-[17px] bg-white shadow-[0px_2px_5px_0px_rgba(0,0,0,0.1)]">
+      {/* Resource Title */}
       <div className="col-span-2 h-full flex items-center">
         <p className="truncate leading-1 text-[14px]">{title}</p>
       </div>
+
+      {/* Viewer Close Button */}
       <div className="flex items-center justify-end h-full">
         <button
           className="w-[19px]"

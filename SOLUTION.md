@@ -35,6 +35,7 @@
 
 **Other Logic**
 
+- `selectedResourceId` atom 기반으로 뷰어를 보여주고 있기에 selectedResourceId를 리셋하면 뷰어가 닫히는 방식으로 구현 하였습니다
 - 제목 변경 시 인풋 필드 밖으로 나오면 수정된 이름으로 저장하는 부분은 input 컴포넌트의 `onBlur` 이벤트를 활용하여 구현 하였습니다
 - 기본적으로 제목 변경 인풋이 활성화 되면 focus를 주고 밖을 클릭 시 blur이 트리거 되면서 저장 로직이 실행이 됩니다
 - 또한, 인풋들 같은 경우는 `<form>`으로 wrapping하여 Enter 키에 대한 서포트도 추가 했습니다

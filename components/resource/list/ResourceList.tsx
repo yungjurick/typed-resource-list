@@ -8,8 +8,10 @@ export default function ResourceList(): JSX.Element {
 
   return (
     <>
+      {/* Resource List Header */}
       <ResourceListHeader />
 
+      {/* Resource List */}
       <div className="p-[10px] flex flex-col gap-y-[10px] h-[calc(100vh-56px)] overflow-auto scrollbar-hide">
         {resourceList.map((resource) => (
           <ResourceListItem
